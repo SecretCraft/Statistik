@@ -1,0 +1,8 @@
+name: Statistik
+main: de.secretcraft.statistik.Statistik
+version: 0.1
+commands:
+  statistik:
+    description: Main Command
+  stats:
+    description: Main Command
