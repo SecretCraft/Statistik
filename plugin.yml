@@ -6,3 +6,5 @@ commands:
     description: Main Command
   stats:
     description: Main Command
+  rank:
+    description: Main Command

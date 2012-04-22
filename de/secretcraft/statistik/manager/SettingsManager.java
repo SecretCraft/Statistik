@@ -38,7 +38,52 @@ public class SettingsManager {
 		config.addDefault("Settings.MySQL.User", "stats");
 		config.addDefault("Settings.MySQL.Password", "password");
 		
-		config.addDefault("Settings.SaveTime", "60");
+		config.addDefault("Settings.SaveTime", "1200");
+		
+		// Beispiel Ranks 1
+		config.addDefault("Ranks.1.Name", "Ranks1");
+		config.addDefault("Ranks.1.Tag", "RA1");
+		config.addDefault("Ranks.1.PlayTime", 100);
+		config.addDefault("Ranks.1.BlockBreak", 5);
+		config.addDefault("Ranks.1.BlockPlace", 5);
+		config.addDefault("Ranks.1.PlayerKill", 5);
+		config.addDefault("Ranks.1.PlayerDeath", 5);
+		config.addDefault("Ranks.1.MonsterKill", 5);
+		config.addDefault("Ranks.1.MonsterDeath", 5);
+		config.addDefault("Ranks.1.OtherDeath", 5);
+		config.addDefault("Ranks.1.Fishing", 5);
+		config.addDefault("Ranks.1.BlockMove",5);
+		config.addDefault("Ranks.1.BlockFall", 5);
+		
+		// Beispiel Ranks 2
+		config.addDefault("Ranks.2.Name", "Ranks2");
+		config.addDefault("Ranks.2.Tag", "RA2");
+		config.addDefault("Ranks.2.PlayTime", 200);
+		config.addDefault("Ranks.2.BlockBreak", 10);
+		config.addDefault("Ranks.2.BlockPlace", 10);
+		config.addDefault("Ranks.2.PlayerKill", 10);
+		config.addDefault("Ranks.2.PlayerDeath", 10);
+		config.addDefault("Ranks.2.MonsterKill", 10);
+		config.addDefault("Ranks.2.MonsterDeath", 10);
+		config.addDefault("Ranks.2.OtherDeath", 10);
+		config.addDefault("Ranks.2.Fishing", 10);
+		config.addDefault("Ranks.2.BlockMove", 10);
+		config.addDefault("Ranks.2.BlockFall", 10);
+		
+		// Beispiel Ranks 3
+		config.addDefault("Ranks.3.Name", "Ranks3");
+		config.addDefault("Ranks.3.Tag", "RA3");
+		config.addDefault("Ranks.3.PlayTime", 20000);
+		config.addDefault("Ranks.3.BlockBreak", 800);
+		config.addDefault("Ranks.3.BlockPlace", 800);
+		config.addDefault("Ranks.3.PlayerKill", 800);
+		config.addDefault("Ranks.3.PlayerDeath", 800);
+		config.addDefault("Ranks.3.MonsterKill", 800);
+		config.addDefault("Ranks.3.MonsterDeath", 800);
+		config.addDefault("Ranks.3.OtherDeath", 800);
+		config.addDefault("Ranks.3.Fishing", 800);
+		config.addDefault("Ranks.3.BlockMove", 800);
+		config.addDefault("Ranks.3.BlockFall", 800);
 		
 		config.options().copyDefaults(true);
 		plugin.saveConfig();
