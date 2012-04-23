@@ -26,6 +26,7 @@ public class StatistikManager {
 	
 	public StatistikManager() {
 		plugin = Statistik.getInstance();
+		settingsManager = plugin.getSettingsManager();
 		connection = plugin.getConnection();
 		
 		
@@ -55,6 +56,8 @@ public class StatistikManager {
 				columnDataTypeMap.put("block_move", new DataType(DataType.INTEGER));
 				columnDataTypeMap.put("block_fall", new DataType(DataType.INTEGER));
 				
+				columnDataTypeMap.put("points", new DataType(DataType.INTEGER));
+				
 				playerTable.create(columnDataTypeMap);
 				
 			}
@@ -83,6 +86,7 @@ public class StatistikManager {
 			if ( player2.getName().equalsIgnoreCase( player.getName() ) ) {
 				
 				// Spieler Stats speichern und entfernen
+				calculatePoints(player2);
 				player2.save();
 				return;
 			}
@@ -112,9 +116,9 @@ public class StatistikManager {
 		
 		if ( players.size() > 0 ) {
 			
-			for ( StatistikPlayer player2 : players ) {
-				
-				player2.save();
+			for ( StatistikPlayer player : players ) {
+				calculatePoints(player);
+				player.save();
 				
 			}
 			
@@ -135,6 +139,31 @@ public class StatistikManager {
 		}
 		
 		return null;
+		
+	}
+	
+	public void calculatePoints( StatistikPlayer player ) {
+		
+		Integer points = 0;
+		
+		points = points + ( ( player.getPlayTime() / settingsManager.getPlayTimeFor() ) * settingsManager.getPlayTimePoints() );
+		
+		points = points + ( ( player.getBlockBreak() / settingsManager.getBlockBreakFor() ) * settingsManager.getBlockBreakPoints()  );
+		points = points + ( ( player.getBlockPlace() / settingsManager.getBlockPlaceFor() ) * settingsManager.getBlockPlacePoints()  );
+		
+		points = points + ( ( player.getPlayerKill() / settingsManager.getPlayerKillFor() ) * settingsManager.getPlayerKillPoints() );
+		points = points + ( ( player.getPlayerDeath() / settingsManager.getPlayerDeathFor() ) * settingsManager.getPlayerDeathPoints() );
+		
+		points = points + ( ( player.getMonsterKill() / settingsManager.getMonsterKillFor() ) * settingsManager.getMonsterKillPoints() );
+		points = points + ( ( player.getMonsterDeath() / settingsManager.getMonsterDeathFor() ) * settingsManager.getMonsterDeathPoints() );
+		
+		points = points + ( ( player.getOtherDeath() / settingsManager.getOtherDeathFor() ) * settingsManager.getOtherDeathPoints() );
+		points = points + ( ( player.getFishing() / settingsManager.getFishingFor() ) * settingsManager.getFishingPoints() );
+		
+		points = points + ( ( player.getBlockMove() / settingsManager.getBlockMoveFor() ) * settingsManager.getBlockMovePoints() );
+		points = points + ( ( player.getBlockFall() / settingsManager.getBlockFallFor() ) * settingsManager.getBlockFallPoints() );
+		
+		player.setPoints(points);
 		
 	}
 	

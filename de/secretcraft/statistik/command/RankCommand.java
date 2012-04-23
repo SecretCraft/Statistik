@@ -120,6 +120,7 @@ public class RankCommand {
 				player.sendMessage( ChatColor.WHITE + "Blšcke gelaufen : " + ChatColor.GOLD + rank.getBlockMove() );
 				player.sendMessage( ChatColor.WHITE + "Blšcke gefallen : " + ChatColor.GOLD + rank.getBlockFall() );
 				
+				player.sendMessage( ChatColor.WHITE + "Punkte gesamt : " + ChatColor.GOLD + rank.getPoints() );
 			}
 			
 		} else {

@@ -27,6 +27,7 @@ public class Rank {
 	private Integer blockMove;
 	private Integer blockFall;
 	
+	private Integer points;
 	
 	public Rank( Integer id, Configuration config ) {
 		
@@ -58,6 +59,7 @@ public class Rank {
 		setBlockMove( config.getInt("Ranks." + id + ".BlockMove") );
 		setBlockFall( config.getInt("Ranks." + id + ".BlockFall") );
 		
+		setPoints( config.getInt("Ranks." + id + ".Points") );
 	}
 
 
@@ -173,6 +175,14 @@ public class Rank {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getPoints() {
+		return points;
+	}
+
+	public void setPoints(Integer points) {
+		this.points = points;
 	}	
 	
 }

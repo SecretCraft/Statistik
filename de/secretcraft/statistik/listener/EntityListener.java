@@ -4,15 +4,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.player.PlayerFishEvent;
 
 import de.secretcraft.statistik.Statistik;
 import de.secretcraft.statistik.manager.StatistikManager;
@@ -40,21 +38,14 @@ public class EntityListener implements Listener {
 			
 			if ( player.getKiller() instanceof Player ) {
 				
-				player.sendMessage("Death Player");
-				
 				statistikManager.getPlayer( player ).addPlayerDeath();
 				statistikManager.getPlayer( player.getKiller() ).addPlayerKill();
 				
-			} else if ( player.getLastDamageCause().getEntity() instanceof Skeleton  || 
-					    player.getLastDamageCause().getEntity() instanceof Zombie) {
-				
-				player.sendMessage("Death Monster");
+			} else if ( player.getLastDamageCause() instanceof EntityDamageByEntityEvent ) {
 				
 				statistikManager.getPlayer(player).addMonsterDeath();
 				
 			} else {
-				
-				player.sendMessage("Death Other");
 				
 				statistikManager.getPlayer( player ).addOtherDeath();
 								
@@ -67,8 +58,6 @@ public class EntityListener implements Listener {
 			
 			if ( monster.getKiller() instanceof Player ) {
 								
-				monster.getKiller().sendMessage("You kill a Monster");
-				
 				statistikManager.getPlayer( monster.getKiller() ).addMonsterKill();
 				
 			}

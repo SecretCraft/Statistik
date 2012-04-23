@@ -73,6 +73,8 @@ public class StatistikCommand {
 		player.sendMessage( ChatColor.WHITE + "Blšcke gelaufen : " + ChatColor.GOLD + stats.getBlockMove() );
 		player.sendMessage( ChatColor.WHITE + "Blšcke gefallen : " + ChatColor.GOLD + stats.getBlockFall() );
 		
+		player.sendMessage( ChatColor.WHITE + "Punkte Gesamt : " + ChatColor.GOLD + stats.getPoints() );
+		
 		player.sendMessage( ChatColor.BLUE + "-----------------------------------------------------");
 		
 	}

@@ -29,6 +29,8 @@ public class StatistikPlayer {
 	private Integer blockMove;
 	private Integer blockFall;
 	
+	private Integer points;
+	
 	public StatistikPlayer( Table table, String name ) {
 		this.table = table;
 		this.name = name;
@@ -62,6 +64,8 @@ public class StatistikPlayer {
 				// Blocks Move and Fall
 				setBlockMove( table.getInteger("block_move", "name", name, 0) );
 				setBlockFall( table.getInteger("block_fall", "name", name, 0) );
+				
+				setPoints( table.getInteger("points", "name", name, 0) );
 				
 			} else {
 				
@@ -135,6 +139,7 @@ public class StatistikPlayer {
 			// Geangelte Fische
 			table.set("fishing", getFishing().toString(), "name", name);
 			
+			table.set("points", getPoints().toString(), "name", name);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -289,5 +294,13 @@ public class StatistikPlayer {
 	
 	public void addFishing() {
 		this.fishing++;
+	}
+
+	public Integer getPoints() {
+		return points;
+	}
+
+	public void setPoints(Integer points) {
+		this.points = points;
 	}
 }

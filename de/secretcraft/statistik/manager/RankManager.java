@@ -93,7 +93,11 @@ public class RankManager {
 												
 												if ( rank.getBlockFall() == 0 || rank.getBlockFall() <= stats.getBlockFall() ) {
 													
-													return true;
+													if ( rank.getPoints() == 0 || rank.getPoints() <= stats.getPoints() ) {
+														
+														return true;
+														
+													}
 													
 												}
 												
