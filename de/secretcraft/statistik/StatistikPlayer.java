@@ -1,6 +1,7 @@
 package de.secretcraft.statistik;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import net.windwaker.sql.Table;
 
@@ -31,9 +32,13 @@ public class StatistikPlayer {
 	
 	private Integer points;
 	
+	private ArrayList<Rank> aviableRanks;
+	
 	public StatistikPlayer( Table table, String name ) {
 		this.table = table;
 		this.name = name;
+		
+		aviableRanks = new ArrayList<Rank>();
 		
 		load();
 	}
@@ -302,5 +307,13 @@ public class StatistikPlayer {
 
 	public void setPoints(Integer points) {
 		this.points = points;
+	}
+
+	public ArrayList<Rank> getAviableRanks() {
+		return aviableRanks;
+	}
+
+	public void setAviableRanks(ArrayList<Rank> aviableRanks) {
+		this.aviableRanks = aviableRanks;
 	}
 }

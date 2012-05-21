@@ -1,6 +1,7 @@
 package de.secretcraft.statistik.listener;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -43,10 +44,18 @@ public class PlayerListener implements Listener {
 	@EventHandler(priority = EventPriority.LOW)
 	public void onPlayerMoveEvent( PlayerMoveEvent event ) {
 		
-		if ( event.getFrom().getBlock().getLocation().distance( event.getTo().getBlock().getLocation() ) > 0.8 && 
-			 event.getFrom().getBlock().getLocation().distance( event.getTo().getBlock().getLocation() ) < 1.2 ) {			
-			statistikManager.getPlayer( event.getPlayer() ).addBlockMove();
-		}		
+		if ( event.getPlayer().getGameMode() == GameMode.SURVIVAL ) {
+			
+			if ( event.getPlayer().isInsideVehicle() == false ) {
+				
+				if ( event.getFrom().getBlock().getLocation().distance( event.getTo().getBlock().getLocation() ) > 0.8 && 
+					event.getFrom().getBlock().getLocation().distance( event.getTo().getBlock().getLocation() ) < 1.2 ) {			
+					statistikManager.getPlayer( event.getPlayer() ).addBlockMove();
+				}	
+				
+			}					
+		
+		}			
 		
 	}
 	

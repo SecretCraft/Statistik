@@ -67,7 +67,7 @@ public class StatistikCommand {
 		
 		player.sendMessage( ChatColor.WHITE + "andere Tode : " + ChatColor.GOLD + stats.getOtherDeath() );
 		
-		player.sendMessage( ChatColor.WHITE + "Fische gefanden : " + ChatColor.GOLD + stats.getFishing() );
+		player.sendMessage( ChatColor.WHITE + "Fische gefangen : " + ChatColor.GOLD + stats.getFishing() );
 		
 		// Move and Fall
 		player.sendMessage( ChatColor.WHITE + "Blšcke gelaufen : " + ChatColor.GOLD + stats.getBlockMove() );

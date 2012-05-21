@@ -1,12 +1,15 @@
 package de.secretcraft.statistik.command;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.milkbowl.vault.chat.Chat;
 
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import de.secretcraft.statistik.Helper;
 import de.secretcraft.statistik.Rank;
 import de.secretcraft.statistik.Statistik;
 import de.secretcraft.statistik.StatistikPlayer;
@@ -37,17 +40,41 @@ public class RankCommand {
 		if ( args.length > 0 ) {
 						
 			if ( args[0].equalsIgnoreCase("set") ) {
-			
-				if ( args.length == 2 ) {
 				
+				if ( args.length > 1 ) {
+					
 					Rank rank = rankManager.getRankByTag( args[1] );				
+					
+					if ( rank == null ) {
+						player.sendMessage(ChatColor.GOLD + "Diesen Rang gibt es nicht.");
+						return;
+					}
+					
+					ArrayList<Rank> ranks = plugin.getRankManager().getRanks();
+					
+					Boolean aviable = false;
+					
+					for ( Rank rank2 : ranks ) {
+						if ( rank.getName().equalsIgnoreCase(rank2.getName()) ) {
+							aviable = true;
+						}
+					}
+					
+					if ( aviable == false ) {
+						player.sendMessage(ChatColor.GOLD + "Dieser Rang ist noch nicht verfügbar.");
+					}
 					
 					String[] groups = chat.getPlayerGroups(player);
 					
-					String prefix = chat.getGroupPrefix(groups[0], null);
+					String prefix = rank.getName() + chat.getGroupPrefix(player.getWorld(), groups[0]);
 					
-					chat.setPlayerPrefix(player, ChatColor.BLUE + "[" + ChatColor.GOLD + rank.getName() + ChatColor.BLUE + "]" + prefix);
+					List<World> worlds = plugin.getServer().getWorlds();
 					
+					for ( World world : worlds ) {
+						chat.setPlayerPrefix(world, player.getName(), prefix);						
+					}
+					
+					player.sendMessage(ChatColor.GREEN + "Rank wurde gesetzt.");
 										
 				} else {
 					player.sendMessage("/rank set RankTag");
@@ -64,10 +91,6 @@ public class RankCommand {
 				
 				listRanks(player, ranks);
 			}
-			
-			
-			// player - rank
-			
 			
 			
 		} else {
@@ -94,7 +117,7 @@ public class RankCommand {
 				player.sendMessage( ChatColor.BLUE + "-----------------------------------------------------");
 				
 				// Name Tag
-				player.sendMessage( ChatColor.WHITE + "Name : " + ChatColor.GOLD + rank.getName() );
+				player.sendMessage( ChatColor.WHITE + "Name : " + Helper.format(rank.getName()) );
 				player.sendMessage( ChatColor.WHITE + "Tag : " + ChatColor.GOLD + rank.getTag() );
 				
 				// Play Time

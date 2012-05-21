@@ -1,6 +1,7 @@
 package de.secretcraft.statistik.listener;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,26 +27,32 @@ public class BlockListener implements Listener {
 	@EventHandler(priority = EventPriority.LOW)
 	public void onBlockBrakeEvent( BlockBreakEvent event ) {
 		
-		Player player = event.getPlayer();
-				
-		if ( player == null ) {
-			return;
-		}
+		if ( event.getPlayer().getGameMode() == GameMode.SURVIVAL ) {
 		
-		statistikManager.getPlayer(player).addBlockBreak();	
+			Player player = event.getPlayer();
+					
+			if ( player == null ) {
+				return;
+			}
+			
+			statistikManager.getPlayer(player).addBlockBreak();
+		}
 		
 	}
 	
 	@EventHandler(priority = EventPriority.LOW)
 	public void onBlockPlaceEvent( BlockPlaceEvent event ) {
 		
-		Player player = event.getPlayer();
-				
-		if ( player == null ) {
-			return;
-		}
+		if ( event.getPlayer().getGameMode() == GameMode.SURVIVAL ) {
 		
-		statistikManager.getPlayer(player).addBlockPlace();	
+			Player player = event.getPlayer();
+					
+			if ( player == null ) {
+				return;
+			}
+			
+			statistikManager.getPlayer(player).addBlockPlace();	
+		}
 		
 	}
 	

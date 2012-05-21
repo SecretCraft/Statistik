@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import de.secretcraft.statistik.Rank;
 import de.secretcraft.statistik.Statistik;
 import de.secretcraft.statistik.StatistikPlayer;
 import net.windwaker.sql.Connection;
@@ -75,7 +77,23 @@ public class StatistikManager {
 	public void loadPlayer( Player player ) {
 		
 		StatistikPlayer statistikPlayer = new StatistikPlayer(playerTable, player.getName() );
-		players.add(statistikPlayer);		
+		
+		
+		
+		
+		players.add(statistikPlayer);
+		
+		
+		
+		
+		
+		statistikPlayer.setAviableRanks( plugin.getRankManager().getRanks(player) );
+	
+		
+		
+		
+		
+			
 		
 	}
 	
@@ -164,6 +182,73 @@ public class StatistikManager {
 		points = points + ( ( player.getBlockFall() / settingsManager.getBlockFallFor() ) * settingsManager.getBlockFallPoints() );
 		
 		player.setPoints(points);
+		
+	}
+	
+	public void checkNewRanks() {
+		
+		if ( players.size() > 0 ) {
+			
+			for ( StatistikPlayer player : players ) {
+				
+				Player spieler = plugin.getServer().getPlayer(player.getName());
+				
+				ArrayList<Rank> ranks = Statistik.getInstance().getRankManager().getRanks( plugin.getServer().getPlayer(player.getName() ) );
+				ArrayList<Rank> newRanks = Statistik.getInstance().getRankManager().getRanks( plugin.getServer().getPlayer(player.getName() ) );
+				ArrayList<Rank> oldRanks = player.getAviableRanks();
+				
+				
+				if ( oldRanks != null ) {
+					
+					if ( ranks != null ) {
+						
+						if ( ranks.size() > 0 ) {
+
+							for ( Rank rank : ranks ) {
+								
+								for ( Rank rank2 : oldRanks ) {
+									
+									if ( rank.equals(rank2) ) {
+										newRanks.remove(rank);
+									}
+									
+								}
+								
+							}
+														
+						}
+						
+						
+						if ( ranks.size() > 0 ) {
+							
+							for ( Rank rank : newRanks ) {
+								spieler.sendMessage(ChatColor.GOLD + "Du hast soeben den Titel "+ rank.getName() + ChatColor.WHITE + " freigeschaltet, nutze nun " + ChatColor.GREEN +"/rank set " + rank.getTag() + ChatColor.GOLD + " um den Titel festzulegen.");
+							}
+							
+						}					
+						
+						
+						
+					}
+					
+				} else {
+					
+					if ( ranks != null ) {
+						
+						for ( Rank rank : ranks ) {
+							spieler.sendMessage(ChatColor.GOLD + "Du hast soeben den Titel "+ rank.getName() + ChatColor.WHITE + " freigeschaltet, nutze nun " + ChatColor.GREEN +"/rank set " + rank.getTag() + ChatColor.GOLD + " um den Titel festzulegen.");
+						}
+						
+					}
+					
+					
+				}
+				
+				player.setAviableRanks(ranks);
+				
+			}
+			
+		}
 		
 	}
 	

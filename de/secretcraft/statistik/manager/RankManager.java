@@ -54,15 +54,21 @@ public class RankManager {
 	
 	public ArrayList<Rank> getRanks( Player player ) {		
 		
-		ArrayList<Rank> available = new ArrayList<Rank>();
+		ArrayList<Rank> available = null;
 		
-		for ( Rank rank : ranks ) {
+		if ( ranks.size() > 0 ) {
 			
-			if ( checkRank(player, rank) ) {
-				available.add(rank);
+			available = new ArrayList<Rank>();
+			
+			for ( Rank rank : ranks ) {
+				
+				if ( checkRank(player, rank) ) {
+					available.add(rank);
+				}
+				
 			}
 			
-		}
+		}	
 		
 		return available;
 	}

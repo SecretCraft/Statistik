@@ -29,28 +29,31 @@ public class EntityListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.LOW)
 	public void onEntityDeathEvent( EntityDeathEvent event ) {
-		
+				
 		Entity entity = event.getEntity();
 		
 		if ( entity instanceof Player ) {
 			
 			Player player = (Player)entity;
 			
-			if ( player.getKiller() instanceof Player ) {
+			if ( player.getWorld().getName().equalsIgnoreCase("pvp") ) {
 				
-				statistikManager.getPlayer( player ).addPlayerDeath();
-				statistikManager.getPlayer( player.getKiller() ).addPlayerKill();
+				if ( player.getKiller() instanceof Player ) {
+					
+					statistikManager.getPlayer( player ).addPlayerDeath();
+					statistikManager.getPlayer( player.getKiller() ).addPlayerKill();
+					
+				} else if ( player.getLastDamageCause() instanceof EntityDamageByEntityEvent ) {
+					
+					statistikManager.getPlayer(player).addMonsterDeath();
+					
+				} else {
+					
+					statistikManager.getPlayer( player ).addOtherDeath();
+									
+				}
 				
-			} else if ( player.getLastDamageCause() instanceof EntityDamageByEntityEvent ) {
-				
-				statistikManager.getPlayer(player).addMonsterDeath();
-				
-			} else {
-				
-				statistikManager.getPlayer( player ).addOtherDeath();
-								
-			}
-			
+			}			
 									
 		} else if ( entity instanceof Monster ) {
 			

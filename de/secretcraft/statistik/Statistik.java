@@ -21,6 +21,7 @@ import de.secretcraft.statistik.manager.RankManager;
 import de.secretcraft.statistik.manager.SettingsManager;
 import de.secretcraft.statistik.manager.StatistikManager;
 import de.secretcraft.statistik.manager.TaskManager;
+import de.secretcraft.statistik.task.CheckNewRanksTask;
 import de.secretcraft.statistik.task.SaveStatsTask;
 import de.secretcraft.statistik.task.Task;
 
@@ -79,6 +80,9 @@ public class Statistik extends JavaPlugin {
 		
 		Task task = new SaveStatsTask();		
 		taskManager.createAsyncRepeatingTask(task, 1200L, 1200L);
+		
+		Task checkNewRanks = new CheckNewRanksTask();
+		taskManager.createAsyncRepeatingTask(checkNewRanks, 1200L, 1200L);
 		
 	}
 	
