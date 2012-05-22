@@ -127,9 +127,6 @@ public class RankManager {
 			
 		}
 		
-		
-		
-		
 		return false;
 	}
 	

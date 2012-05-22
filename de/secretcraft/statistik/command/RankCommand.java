@@ -50,31 +50,25 @@ public class RankCommand {
 						return;
 					}
 					
-					ArrayList<Rank> ranks = plugin.getRankManager().getRanks();
-					
-					Boolean aviable = false;
-					
-					for ( Rank rank2 : ranks ) {
-						if ( rank.getName().equalsIgnoreCase(rank2.getName()) ) {
-							aviable = true;
+					if ( rankManager.checkRank(player, rank) ) {
+						
+						String[] groups = chat.getPlayerGroups(player);
+						
+						String prefix = rank.getName() + chat.getGroupPrefix(player.getWorld(), groups[0]);
+						
+						List<World> worlds = plugin.getServer().getWorlds();
+						
+						for ( World world : worlds ) {
+							chat.setPlayerPrefix(world, player.getName(), prefix);						
 						}
-					}
+						
+						player.sendMessage(ChatColor.GREEN + "Rank wurde gesetzt.");
 					
-					if ( aviable == false ) {
+					} else {
+						
 						player.sendMessage(ChatColor.GOLD + "Dieser Rang ist noch nicht verfügbar.");
-					}
-					
-					String[] groups = chat.getPlayerGroups(player);
-					
-					String prefix = rank.getName() + chat.getGroupPrefix(player.getWorld(), groups[0]);
-					
-					List<World> worlds = plugin.getServer().getWorlds();
-					
-					for ( World world : worlds ) {
-						chat.setPlayerPrefix(world, player.getName(), prefix);						
-					}
-					
-					player.sendMessage(ChatColor.GREEN + "Rank wurde gesetzt.");
+						
+					}	
 										
 				} else {
 					player.sendMessage("/rank set RankTag");
