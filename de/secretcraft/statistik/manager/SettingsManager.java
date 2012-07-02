@@ -10,6 +10,7 @@ public class SettingsManager {
 	private Configuration config;
 	
 	private Boolean debug;
+	private Boolean logPlayerTime;
 	
 	private String host;
 	private String database;
@@ -59,6 +60,7 @@ public class SettingsManager {
 	
 	public void addDeafaults() {
 		config.addDefault("Settings.Debug", false);
+		config.addDefault("Settings.Log.OnlyPlayerTime", true);
 		
 		config.addDefault("Settings.MySQL.Host", "localhost");
 		config.addDefault("Settings.MySQL.Database", "stats");
@@ -152,6 +154,7 @@ public class SettingsManager {
 		plugin.reloadConfig();
 		
 		setDebug( config.getBoolean("Settings.Debug") );
+		setOnlyPlayerTime( config.getBoolean("Settings.Log.OnlyPlayerTime") );
 		
 		setHost( config.getString("Settings.MySQL.Host") );
 		setDatabase( config.getString("Settings.MySQL.Database") );
@@ -206,6 +209,14 @@ public class SettingsManager {
 
 	public void setDebug(Boolean debug) {
 		this.debug = debug;
+	}
+	
+	public Boolean getOnlyPlayerTime() {
+		return logPlayerTime;
+	}
+	
+	public void setOnlyPlayerTime(Boolean logPlayerTime) {
+		this.logPlayerTime = logPlayerTime;
 	}
 
 	public String getHost() {

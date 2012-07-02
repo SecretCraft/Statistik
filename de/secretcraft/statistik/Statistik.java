@@ -45,6 +45,9 @@ public class Statistik extends JavaPlugin {
 	private StatistikCommand statistikCommand;
 	private RankCommand rankCommand;
 	
+	// default: true
+	private Boolean onlyPlayerTime;
+	
 	// DB
 	Connection connection;
 	
@@ -60,14 +63,21 @@ public class Statistik extends JavaPlugin {
 		settingsManager = new SettingsManager();
 		connectToDB();
 		
+		onlyPlayerTime = settingsManager.getOnlyPlayerTime();
+		
 		statistikManager = new StatistikManager();
 		taskManager = new TaskManager();
 		rankManager = new RankManager();
 		
 		// Listener
-		playerListener = new PlayerListener();
-		blockListener = new BlockListener();
-		entityListener = new EntityListener();
+		if(onlyPlayerTime) {
+			playerListener = new PlayerListener();
+		} else {
+			playerListener = new PlayerListener();
+			blockListener = new BlockListener();
+			entityListener = new EntityListener();
+		}
+		
 		
 		// Chat for Ranks
 		setupChat();	
@@ -164,6 +174,10 @@ public class Statistik extends JavaPlugin {
 	
 	public Connection getConnection() {
 		return connection;
+	}
+	
+	public Boolean getOnlyPlayerTime() {
+		return onlyPlayerTime;
 	}
 	
 	public Chat getChat() {

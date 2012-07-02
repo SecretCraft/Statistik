@@ -47,11 +47,20 @@ public class StatistikCommand {
 			stats = statistikManger.getPlayer(player);
 		}
 		
-		player.sendMessage( ChatColor.BLUE + "-----------------------------------------------------");
+		if(plugin.getOnlyPlayerTime()) {
+			
+			player.sendMessage( ChatColor.BLUE + "-------------------------------------------");
+			player.sendMessage( ChatColor.WHITE + "Spielzeit : " + ChatColor.GOLD + secondsToString( stats.getPlayTime() ) );
+			player.sendMessage( ChatColor.BLUE + "-------------------------------------------");
+			
+			return;
+			
+		}
+		
+		player.sendMessage( ChatColor.BLUE + "-------------------------------------------");
 		
 		// Play Time
 		player.sendMessage( ChatColor.WHITE + "Spielzeit : " + ChatColor.GOLD + secondsToString( stats.getPlayTime() ) );
-		
 		
 		// Blšcke
 		player.sendMessage( ChatColor.WHITE + "Blšcke Zerstšrt : " + ChatColor.GOLD + stats.getBlockBreak() );
@@ -75,7 +84,7 @@ public class StatistikCommand {
 		
 		player.sendMessage( ChatColor.WHITE + "Punkte Gesamt : " + ChatColor.GOLD + stats.getPoints() );
 		
-		player.sendMessage( ChatColor.BLUE + "-----------------------------------------------------");
+		player.sendMessage( ChatColor.BLUE + "-------------------------------------------");
 		
 	}
 	
